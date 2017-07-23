@@ -15,7 +15,7 @@ defmodule TwitterBot do
         tweet = %ExTwitter.Model.Tweet{} ->
           tweet
           |> parsed_tweet
-          |> IO.puts
+          |> ExTwitter.update
 
           IO.puts "Responded to tweet!"
 
