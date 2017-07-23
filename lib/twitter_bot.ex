@@ -4,27 +4,34 @@ defmodule TwitterBot do
   """
 
   @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> TwitterBot.hello
-      :world
+  Start the twitter bot listening to the stream.
 
   """
-  def hello do
+  def start do
+    IO.puts "Starting Bot.."
     stream = ExTwitter.stream_filter(track: "@_mattsecrist")
     for message <- stream do
       case message do
         tweet = %ExTwitter.Model.Tweet{} ->
-          IO.inspect tweet
+          tweet
+          |> parsed_tweet
+          |> IO.puts
+
+          IO.puts "Responded to tweet!"
 
         limit = %ExTwitter.Model.Limit{} ->
           IO.puts "limit = #{limit.track}"
-          
+
         _ ->
           IO.inspect message
       end
     end
+  end
+
+  def parsed_tweet(tweet) do
+    text = tweet.text
+    |> String.replace("@_mattsecrist ", "")
+
+    "@#{tweet.user.screen_name} said #{text}"
   end
 end
