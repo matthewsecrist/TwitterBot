@@ -1,19 +1,23 @@
 # TwitterBot
+[![Build Status](https://travis-ci.org/matthewsecrist/TwitterBot.svg?branch=master)](https://travis-ci.org/matthewsecrist/TwitterBot)
 
-**TODO: Add description**
+TwitterBot is a bot built using Elixir. Its aim is to use Wit.ai's language processing to determine the intent of a tweet, and then respond appropriately. Currently it can tell the current temperature of a city.
 
-## Installation
+Follow it at [@SupprtBot](https://twitter.com/SupprtBot).
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `twitter_bot` to your list of dependencies in `mix.exs`:
+---
 
-```elixir
-def deps do
-  [{:twitter_bot, "~> 0.1.0"}]
-end
+Want to run your own? Clone the repository, and create a .env file like this:
+
+```
+export CONSUMER_KEY=<twitter consumer key>
+export CONSUMER_SECRET=<twitter consumer secret>
+export ACCESS_TOKEN=<twitter access token>
+export ACCESS_SECRET=<twitter access secret>
+export OPENWEATHER_API_KEY=<openweather api key>
+export WIT_KEY=<wit.api key>
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/twitter_bot](https://hexdocs.pm/twitter_bot).
+Then in lib/twitter_bot.ex modify the @handle to be your bot's name.
 
+After that, run it: mix run -e TwitterBot.start
