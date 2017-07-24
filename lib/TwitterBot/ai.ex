@@ -29,7 +29,6 @@ defmodule TwitterBot.Ai do
         |> Enum.map(fn x -> x["value"] end)
         |> TwitterBot.Weather.for
 
-
       _ ->
         IO.puts "Don't know how to respond."
     end

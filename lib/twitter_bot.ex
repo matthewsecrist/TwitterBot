@@ -1,4 +1,5 @@
 defmodule TwitterBot do
+  @handle "SupprtBot"
   @moduledoc """
   Documentation for TwitterBot.
   """
@@ -9,13 +10,13 @@ defmodule TwitterBot do
   """
   def start do
     IO.puts "Starting Bot.."
-    stream = ExTwitter.stream_filter(track: "@_mattsecrist")
+    stream = ExTwitter.stream_filter(track: @handle)
     for message <- stream do
       case message do
         tweet = %ExTwitter.Model.Tweet{} ->
           tweet
           |> parsed_tweet
-          |> IO.inspect
+          |> ExTwitter.update
 
           IO.puts "Responded to tweet!"
 
@@ -30,7 +31,7 @@ defmodule TwitterBot do
 
   def parsed_tweet(tweet) do
     text = tweet.text
-    |> String.replace("@_mattsecrist ", "")
+    |> String.replace("#{@handle} ", "")
     |> TwitterBot.Ai.fetch
 
     "@#{tweet.user.screen_name} - #{text}"
