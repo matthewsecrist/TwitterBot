@@ -19,11 +19,13 @@ defmodule TwitterBot.Ai do
   end
 
   defp wit_url(text) do
-    "https://api.wit.ai/message?v=20170723&q='#{text}'"
+    "https://api.wit.ai/message?v=20170723&q=#{text}"
+    |> IO.inspect
   end
 
   defp handle_response({:ok, %HTTPoison.Response{status_code: 200, body: body}}) do
     Poison.decode!(body)
+    |> IO.inspect
   end
 
 #
@@ -49,6 +51,7 @@ defmodule TwitterBot.Ai do
 # If no intent is found, it responds with "I don't know how to respond to that."
 #
     intent = body["entities"]["intent"]
+    |> IO.inspect
     |> determine_intent
 
     case intent do
@@ -63,6 +66,8 @@ defmodule TwitterBot.Ai do
         TwitterBot.Coin.flip
       ["roll_dice"] ->
         TwitterBot.Dice.roll
+      ["say_hello"] ->
+        TwitterBot.Say.hello
       # Intent is undefined.
       _ ->
         intent
