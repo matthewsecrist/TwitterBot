@@ -1,0 +1,13 @@
+language: elixir
+elixir:
+- 1.4
+otp_release:
+- 19
+sudo: false
+deploy:
+  provider: heroku
+  api_key:
+    secure: A0GjjlQdXEwkvU42E7bGKloj0YF3aeU1erNvd0mWCsLn2PMkPfMhTyX6fNGb2CM7OIY0SO8NM16gRQC2dGk+12yfXCkoMJ6900r9uNRMgPdJ/awdCtBrxj4HVXh9vwnAyyDfk+zL2oRtFfrFbouDC02gNAjQuK6B1lxyeXYdx3Cl6ShJlZutAlzHFrSvcApaT0OLMAj+9lqT39fzzcqUnWVGeLBRdMliJOKaE8OsTfuYSY0Rf522jXPFjOJn2EmHzZD4XK3ar4iZYqCMc3Xhpk2g8LiYR58ksNE3EStq9u6PBRXdMdYIRi29BAfYbEnAMmffVcUA/+K2MSSfZouCqmJqzjRolPnQ93Mljail0ZUAXr76vtKQ/ajTpYUG5+XJZktvi3QPUowMgrpssWIVtP0AlySRFF3SbqRkP0REPPVl9SFtxGdKdG4UloeT0l1C3YDWzK0uOi7eGRuxlHHaMYzAen9isccQFSjr3RJrlTQYo51lLpqBNVxkTHoDrOkpimIALF2HCIujbs3L2yPG/17YdEGSjwCJuOWJLPhxlsiA+ltEwdyQ6yFiiOekC5sqV1x5OccnL6VafuBGzscGKADaW30rTMGvC0CXs9Xn2OI/rXf5BbbnJi020leYifCaXoffVgz/r5TrfY+pBQq9bMrSheNopjCYDpY+OF1xqvQ=
+  app: enigmatic-forest-57600
+  on:
+    repo: matthewsecrist/TwitterBot
