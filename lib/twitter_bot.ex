@@ -15,7 +15,7 @@ defmodule TwitterBot do
         tweet = %ExTwitter.Model.Tweet{} ->
           tweet
           |> parsed_tweet
-          |> ExTwitter.update
+          |> IO.inspect
 
           IO.puts "Responded to tweet!"
 
@@ -31,7 +31,8 @@ defmodule TwitterBot do
   def parsed_tweet(tweet) do
     text = tweet.text
     |> String.replace("@_mattsecrist ", "")
+    |> TwitterBot.Ai.fetch
 
-    "@#{tweet.user.screen_name} said #{text}"
+    "@#{tweet.user.screen_name} - #{text}"
   end
 end

@@ -16,7 +16,7 @@ defmodule TwitterBot.Mixfile do
   # Type "mix help compile.app" for more information
   def application do
     # Specify extra applications you'll use from Erlang/Elixir
-    [extra_applications: [:logger, :extwitter]]
+    [extra_applications: [:logger, :extwitter, :httpoison]]
   end
 
   # Dependencies can be Hex packages:
@@ -29,6 +29,10 @@ defmodule TwitterBot.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    [{:extwitter, "~> 0.8.6"}]
+    [
+      {:extwitter, "~> 0.8.6"},
+      {:httpoison, "~> 0.12.0"},
+      {:poison, "~> 3.1"}
+    ]
   end
 end

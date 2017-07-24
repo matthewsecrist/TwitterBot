@@ -10,7 +10,8 @@ use Mix.Config
 
 # You can configure for your application as:
 #
-#     config :twitter_bot, key: :value
+config :twitter_bot, openweathermap_key: System.get_env("OPENWEATHER_API_KEY")
+config :twitter_bot, wit_key: System.get_env("WIT_KEY")
 #
 # And access this configuration in your application as:
 #
