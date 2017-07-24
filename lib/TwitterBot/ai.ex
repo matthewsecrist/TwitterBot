@@ -46,18 +46,24 @@ defmodule TwitterBot.Ai do
 # and then based on that it would grab "Chicago" from
 # location > value and pass it off to TwitterBot.Weather.for("Chicago")
 #
-# If all else fails, it responds with "I don't know how to respond to that"
+# If no intent is found, it responds with "I don't know how to respond to that."
 #
     intent = body["entities"]["intent"]
     |> determine_intent
 
     case intent do
+      # Intent is to get the weather or temperature in a city.
       ["temperature_get"] ->
         [location] = body["entities"]["location"]
         |> Enum.map(fn x -> x["value"] end)
 
         TwitterBot.Weather.for(location)
-
+      # Intent is to flip a coin.
+      ["coin_flip"] ->
+        TwitterBot.Coin.flip
+      ["roll_dice"] ->
+        TwitterBot.Dice.roll
+      # Intent is undefined.
       _ ->
         intent
     end
