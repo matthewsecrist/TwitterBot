@@ -16,13 +16,11 @@ defmodule TwitterBot do
       case message do
         # Check to see if the message is a tweet
         tweet = %ExTwitter.Model.Tweet{} ->
-
           text = tweet
           |> parsed_tweet
           |> TwitterBot.Ai.fetch
 
           ExTwitter.update("@#{tweet.user.screen_name} - #{text}")
-
           IO.puts "Responded to tweet!"
 
         limit = %ExTwitter.Model.Limit{} ->

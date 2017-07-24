@@ -33,12 +33,12 @@ defmodule TwitterBot.Ai do
   defp decode_response(body) do
 # Wit returns a response something like:
 #
-# {:ok, %{"_text" => "'What is the weather like in Chicago?'",
-#   "entities" => %{"intent" => [%{"confidence" => 0.99563384734789,
-#        "value" => "temperature_get"}],
-#     "location" => [%{"confidence" => 0.99706676119462, "suggested" => true,
-#        "type" => "value", "value" => "Chicago"}]},
-#   "msg_id" => "0gX6xw1GNHnRToALG"}}
+# {:ok,
+# %{"_text" => "'What is the weather like in Chicago?'",
+#  "entities" => %{
+#     "intent" => [%{"confidence" => 0.99563384734789, "value" => "temperature_get"}],
+#     "location" => [%{"confidence" => 0.99706676119462, "suggested" => true, "type" => "value", "value" => "Chicago"}]},
+#  "msg_id" => "0gX6xw1GNHnRToALG"}}
 #
 # So this grabs the intent from Entities > Intent > value.
 # Once it determines the intent, it decides what to do with it.
@@ -48,18 +48,26 @@ defmodule TwitterBot.Ai do
 #
 # If all else fails, it responds with "I don't know how to respond to that"
 #
-    [intent] = body["entities"]["intent"]
-    |> Enum.map(fn x -> x["value"] end)
+    intent = body["entities"]["intent"]
+    |> determine_intent
 
     case intent do
-      "temperature_get" ->
+      ["temperature_get"] ->
         [location] = body["entities"]["location"]
         |> Enum.map(fn x -> x["value"] end)
 
         TwitterBot.Weather.for(location)
 
       _ ->
-        IO.puts "I don't know how to respond to that."
+        intent
     end
+  end
+
+  defp determine_intent(intent) when is_list(intent) do
+    Enum.map(intent, fn x -> x["value"] end)
+  end
+
+  defp determine_intent(_intent) do
+    "I don't know how to respond to that."
   end
 end
