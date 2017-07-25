@@ -64,6 +64,8 @@ defmodule TwitterBot.Ai do
       # Intent is to roll a die.
       ["roll_dice"] ->
         TwitterBot.Dice.roll
+      ["tell_joke"] ->
+        TwitterBot.Say.joke
       # Intent is to say hello.
       ["say_hello"] ->
         TwitterBot.Say.hello
