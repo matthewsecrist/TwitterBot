@@ -23,9 +23,6 @@ defmodule TwitterBot do
           ExTwitter.update("@#{tweet.user.screen_name} - #{text}")
           IO.puts "Responded to tweet!"
 
-        limit = %ExTwitter.Model.Limit{} ->
-          IO.puts "limit = #{limit.track}"
-
         _ ->
           IO.inspect message
       end
