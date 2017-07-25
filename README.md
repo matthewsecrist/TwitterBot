@@ -29,6 +29,11 @@ SupprtBot will flip a coin.
 ```
 SupprtBot will say hello back and provide a link to this repository.
 
+```
+@SupprtBot tell me a joke
+```
+SupprtBot will respond with a joke from the [icanhazdadjoke api](https://icanhazdadjoke.com/api).
+
 ---
 
 Want to run your own? Clone the repository, and create a .env file like this:
