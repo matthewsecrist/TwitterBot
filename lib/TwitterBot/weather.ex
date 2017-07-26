@@ -18,7 +18,7 @@ defmodule TwitterBot.Weather do
     case result do
       {:ok, temp} ->
         "In #{location} it is currently #{temp} F"
-      :error ->
+      {:error, _} ->
         "#{location} not found"
     end
   end
@@ -32,8 +32,7 @@ defmodule TwitterBot.Weather do
     |> Poison.decode!
     |> compute_temperature
   end
-
-  defp parse_response(_), do: :error
+  defp parse_response(_), do: {:error, "Error"}
 
   defp compute_temperature(json) do
     temp = ((json["main"]["temp"] - 273.15) * 9/5 + 32) |> Float.round(1)
